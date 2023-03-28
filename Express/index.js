@@ -7,22 +7,38 @@
 //REQ: são os dados enviados pelo usuário.
 //RES: É a resposta que vai ser enviada para o usuário.
 
+const express = require("express") //Importando o express 
+const app = express(); //Iniciando o express
 
-app.get("/blog", function (req, res) {
-    res.send("Bem vindo ao meu blog!")
+app.get("/", function (req, res) {
+    res.send("Bem vindo ao meu site!")
+})
+
+app.get("/blog/ :artigo?", function (req, res) {
+    var artigo = req.params.artigo;
+    if (artigo) {
+      res.send("<h2>Artigo: " + artigo + " </h2>")
+    } else {
+      res.send("Bem vindo ao meu blog!");  
+    }
+    
 });
 
 app.get("/canal/youtube/", function (req, res) {
-    res.send("Bem vindo ao meu canal!")
+    var canal = req.query["canal"];//Query está deixando em desus.
+    if (canal) {
+        res.send(canal);
+    } else {
+        res.send("Nenhum canal fornecido!")
+    }
 });
 
-app.get("/Ola/:nome", function (req, res) {
+app.get("/Ola/:nome/ :empresa", function (req, res) {
     var nome = req.params.nome;
-    res.send("<h1>Oi " + nome + " </h1>")
+    var empresa = req.params.empresa;
+    res.send("<h1>Oi " + nome + " do " + empresa + " </h1>")
 });
 
-const express = require("express") //Importando o express 
-const app = express(); //Iniciando o express
 
 app.listen(4000, function (erro) {
     if (erro) {
