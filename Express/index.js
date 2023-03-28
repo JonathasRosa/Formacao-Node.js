@@ -25,7 +25,7 @@ app.get("/blog/ :artigo?", function (req, res) {
 });
 
 app.get("/canal/youtube/", function (req, res) {
-    var canal = req.query["canal"];//Query está deixando em desus.
+    var canal = req.query["canal"];//Query está entrando em desuso.
     if (canal) {
         res.send(canal);
     } else {
