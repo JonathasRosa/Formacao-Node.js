@@ -1,29 +1,70 @@
+//SISTEMA DE VALIDAÇÃO DE FORMLÁRIO.
 var express = require("express");
 var app = express();
 var bodyParser = require("body-parser");
 var session = require("express-session");
 var flash = require("express-flash");
+var cookieParser = require("cookie-parser")
 
 app.set('view engine', 'ejs');
 
 // parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 
+app.use(cookieParser("159753jr"));
 app.use(
   session({
     secret: "keyboard cat",
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: true },
+    cookie: { maxAge: 60000 },
   })
 );
 app.use(flash());
 
-app.get("/", (req, res) => {
-    res.render(index);
+app.get("/", (req, res) => {   
+    var emailError = req.flash("emailError");
+    var pontosError = req.flash("pontosError");
+    var nomeError = req.flash("nomeError");
+    var email = req.flash("email");
+
+    emailError = (emailError == undefined || emailError.length == 0) ? undefined : emailError;
+    email = (email == undefined || email.length == 0) ? "" : email;
+
+    res.render("index", { emailError, pontosError, nomeError, email: email });
 });
+
+app.post("/form", (req, res) => {
+    var { email, nome, pontos } = req.body;
+
+    var emailError;
+    var pontosError;
+    var nomeError;
+
+    if (email == undefined || email == "") {
+        emailError = "O email não pode ser vazio.";
+    }
+    if (pontos == undefined || pontos < 20) {
+        pontosError = "Você não pode ter menos de 20 pontos.";
+    }
+    if (nome == undefined || nome == "") {
+        nomeError = " O nome não pode ser vazio";
+    }
+    if (nome.length < 4) {
+        nomeError = "Nome muito pequeno";
+    }
+    if (emailError != undefined || pontosError != undefined || nomeError != undefined) {
+        req.flash("emailError", emailError);
+        req.flash("pontosError", pontosError);
+        req.flash("nomeError", nomeError);
+        req.flash("email", email);
+        res.redirect("/");
+    } else {
+        res.send("Form ok.");
+    }
+})
 
 app.listen(5678, (req, res) => {
     console.log("Servidor rodando")
