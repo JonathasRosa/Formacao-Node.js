@@ -1,11 +1,14 @@
 {
   "name": "banco-knex",
   "version": "1.0.0",
-  "description": "",
   "main": "note.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC"
+  "author": "Jonathas Rosa",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "npm": "^9.2.0"
+  }
 }
