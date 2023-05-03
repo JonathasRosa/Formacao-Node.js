@@ -1,7 +1,7 @@
 {
   "name": "banco-knex",
   "version": "1.0.0",
-  "main": "note.js",
+  "main": "database.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -9,6 +9,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "mysql2": "^3.2.0",
     "npm": "^9.2.0"
   }
 }
