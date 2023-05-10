@@ -1,10 +1,31 @@
-const mongoose = require ("mongoose");
+const mongoose = require("mongoose");
 const articleModel = require("./article")
 
 mongoose.connect("mongodb://localhost:27017/", {useNewUrlParser: true}, {useUnifiedTopology: true});
 
 const Article = mongoose.model("Article", articleModel);
 
+/*
+// Cadastro
+const artigo = new Article({
+    title: "Olá mundo", 
+    author:"Jhon", 
+    body:"jbdcsb",
+    especial: true,
+    resume: {
+        content:"bla bla bla",
+        author: "Teste!!"
+    }
+});
+
+
+const mongoose = require("mongoose");
+const articleModel = require("./article");
+
+mongoose.connect("mongodb://localhost:27017/", {useNewUrlParser: true}, {useUnifiedTopology: true});
+
+const Article = mongoose.model("Article", articleModel);
+/*
 //Atualizando dados
 
 Article.findByIdAndUpdate("Id do dado aqui",{
@@ -16,7 +37,7 @@ Article.findByIdAndUpdate("Id do dado aqui",{
 }).cath(err => {
     console.log(err)
 });
-
+*/
 /*Deletando dados
 Article.findByIdAndDelete("id aqui.").then(()=>{
     console.log("Dado removido");
@@ -34,6 +55,7 @@ Article.find({'_id' : "id aqui."}).then(article =>{
 }).catch(err =>{
     console.log(err)
 });
+
 
 */
 /* Busca de dados
@@ -54,10 +76,4 @@ const artigo = new Article({
         content:"bla bla bla",
         author: "Teste!!"
     }
-});
-
-artigo.save().then(()=>{
-    console.log("Artigo salvo com sucesso!");
-}).catch(err =>{
-    console.log(err);
-});*/
+})
