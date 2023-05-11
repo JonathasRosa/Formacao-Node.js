@@ -5,9 +5,7 @@ app.get("/",(req, res)=>{
     res.json({success: true})
 })
 
-app.listen(3131,()=>{
-    console.log("Servidor rodando na porta 3131.")
-})
+module.exports = app;
 
 /*
 module.exports = {
